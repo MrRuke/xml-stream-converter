@@ -5,13 +5,41 @@ import argparse
 import xml.etree.ElementTree as ET
 from tqdm import tqdm
 
+import tkinter as tk
+from tkinter import filedialog, messagebox
+
 CSV_HEADERS = ['id', 'name', 'category', 'price', 'stock']
 
-def convert_xml_to_csv(xml_file, csv_file):
-    if not os.path.exists(xml_file):
-        print(f"Error: File '{xml_file}' not found.")
-        return
+def get_files_via_gui():
+    root = tk.Tk()
+    root.withdraw()
 
+    print("Waiting...")
+    input_path = filedialog.askopenfilename(
+        title="Which xml file do you want to convert?",
+        filetypes=[("XML files", "*.xml"), ("All files", "*.*")]
+    )
+    
+    if not input_path:
+        print("Cancelled")
+        return None, None
+
+    print(f"   Выбран: {os.path.basename(input_path)}")
+
+    output_path = filedialog.asksaveasfilename(
+        title="Where to save CSV file?",
+        defaultextension=".csv",
+        filetypes=[("CSV files", "*.csv")],
+        initialfile="data_converted.csv"
+    )
+
+    if not output_path:
+        print("Cancelled")
+        return None, None
+
+    return input_path, output_path
+
+def convert_xml_to_csv(xml_file, csv_file):
     file_size_mb = os.path.getsize(xml_file) / (1024 * 1024)
     print("-" * 40)
     print(f"Input file: {xml_file} ({file_size_mb:.2f} MB)")
@@ -53,11 +81,7 @@ def convert_xml_to_csv(xml_file, csv_file):
     print(f"Success! Time of execution: {duration:.2f}/s")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-
-    parser.add_argument("input", help="Path to XML file")
-    parser.add_argument("output", help="Path to CSV file")
-
-    args = parser.parse_args()
-
-    convert_xml_to_csv(args.input, args.output)
+    in_file, out_file = get_files_via_gui()
+    
+    if in_file and out_file:
+        convert_xml_to_csv(in_file, out_file)
