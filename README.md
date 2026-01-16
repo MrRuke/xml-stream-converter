@@ -1,3 +1,5 @@
+[![Python Tests](https://github.com/MrRuke/xml-stream-converter/actions/workflows/python-tests.yml/badge.svg)](https://github.com/MrRuke/xml-stream-converter/actions/workflows/python-tests.yml)
+
 # 🚀 High-Performance XML to CSV Converter
 
 High-performance streaming converter designed for processing massive XML datasets (10GB+) with minimal memory footprint (O(1) RAM usage).
@@ -19,4 +21,3 @@ High-performance streaming converter designed for processing massive XML dataset
 ## ✅ Testing
 Unit tests are implemented using **pytest**.
 
-[![Python Tests](https://github.com/MrRuke/xml-stream-converter/actions/workflows/python-tests.yml/badge.svg)](https://github.com/MrRuke/xml-stream-converter/actions/workflows/python-tests.yml)
