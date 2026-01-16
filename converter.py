@@ -1,6 +1,7 @@
 import csv
 import time
 import xml.etree.ElementTree as ET
+from tqdm import tqdm
 
 INPUT_FILE = "large_data.xml"
 OUTPUT_FILE = "data_converted.csv"
@@ -21,26 +22,25 @@ def convert_xml_to_csv(xml_file, csv_file):
         _, root = next(context)
         
         count = 0
-        
-        for event, elem in context:
-            if elem.tag == "product":
-                try:
-                    p_id = elem.attrib.get('id')
-                    name = elem.find('name').text
-                    category = elem.find('category').text
-                    price = elem.find('price').text
-                    stock = elem.find('stock').text
-                    
-                    writer.writerow([p_id, name, category, price, stock])
-                    count += 1
-                except AttributeError:
-                    pass
 
-                elem.clear()
-                root.clear()
-            
-            if count % 50_000 == 0 and count > 0:
-                print(f"   -> Finished {count} lines...")
+        with tqdm(total=None, unit=" rec", desc="Processing") as pbar:
+            for event, elem in context:
+                if elem.tag == "product":
+                    try:
+                        p_id = elem.attrib.get('id')
+                        name = elem.find('name').text
+                        category = elem.find('category').text
+                        price = elem.find('price').text
+                        stock = elem.find('stock').text
+                        
+                        writer.writerow([p_id, name, category, price, stock])
+                        count += 1
+                        pbar.update(1)
+                    except AttributeError:
+                        pass
+
+                    elem.clear()
+                    root.clear()
 
     end_time = time.time()
     duration = end_time - start_time
