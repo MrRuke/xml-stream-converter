@@ -4,7 +4,7 @@ import time
 FILENAME = "large_data.xml"
 TOTAL_RECORDS = 500_000 
 
-CATEGORIES = ["Electronics", "Books", "Clothing", "Home & Garden", "Toys", "Sports"]
+CATEGORIES = ["Electronics", "Books", "Clothing", "Home and Garden", "Toys", "Sports"]
 ADJECTIVES = ["Super", "Awesome", "Cheap", "Luxury", "Smart", "Old-school", "Future"]
 NOUNS = ["Phone", "Book", "T-Shirt", "Sofa", "Robot", "Ball", "Laptop"]
 
@@ -36,7 +36,6 @@ def generate_xml(filename, count):
             if (i + 1) % 50_000 == 0:
                 print(f"   -> Executed {i + 1} items...")
 
-        # Закрываем корневой тег
         f.write('</catalog>')
     
     end_time = time.time()
