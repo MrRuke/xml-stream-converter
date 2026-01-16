@@ -18,3 +18,5 @@ High-performance streaming converter designed for processing massive XML dataset
 
 ## ✅ Testing
 Unit tests are implemented using **pytest**.
+
+[![Python Tests](https://github.com/MrRuke/xml-stream-converter/actions/workflows/python-tests.yml/badge.svg)](https://github.com/MrRuke/xml-stream-converter/actions/workflows/python-tests.yml)
