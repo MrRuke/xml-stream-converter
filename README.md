@@ -15,3 +15,6 @@ High-performance streaming converter designed for processing massive XML dataset
 * **xml.etree.ElementTree** (Standard Library) - for C-optimized XML parsing.
 * **Tkinter** - for native OS file dialogs.
 * **tqdm** - for CLI progress visualization.
+
+## ✅ Testing
+Unit tests are implemented using **pytest**.
